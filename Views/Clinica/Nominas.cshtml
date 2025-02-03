@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Nóminas";
+    Layout = "_Layout";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 class="fw-bold display-5">Gestión de Nóminas</h1>
+            <p class="text-muted fs-5">Revisa, edita y administra las nóminas del personal de la clínica y laboratorio.</p>
+        </div>
+    </div>
+
+    <!-- Filtro para elegir entre Clínica y Laboratorio -->
+    <div class="row mb-4">
+        <div class="col-md-4 offset-md-4">
+            <label for="filtroArea" class="form-label">Filtrar por Área:</label>
+            <select class="form-select" id="filtroArea" onchange="filtrarNominas()">
+                <option value="Todas">Todas</option>
+                <option value="Clinica">Clínica</option>
+                <option value="Laboratorio">Laboratorio</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Tabla de Nóminas -->
+    <div class="table-responsive">
+        <table class="table table-bordered text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Área</th>
+                    <th>Trabajos Terminados</th>
+                    <th>Sueldo Base</th>
+                    <th>Bonificaciones</th>
+                    <th>Total a Pagar</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-area="Clinica">
+                    <td>Dra. Ana Martínez</td>
+                    <td>Clínica</td>
+                    <td>12</td>
+                    <td>$20,000</td>
+                    <td>$2,000</td>
+                    <td>$22,000</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm me-1">Editar</button>
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+                <tr data-area="Clinica">
+                    <td>Dra. Lucía Gómez</td>
+                    <td>Clínica</td>
+                    <td>15</td>
+                    <td>$22,000</td>
+                    <td>$1,500</td>
+                    <td>$23,500</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm me-1">Editar</button>
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+                <tr data-area="Laboratorio">
+                    <td>Juan Pérez</td>
+                    <td>Laboratorio</td>
+                    <td>18</td>
+                    <td>$18,000</td>
+                    <td>$1,000</td>
+                    <td>$19,000</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm me-1">Editar</button>
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Botón para volver al Dashboard de Clínica -->
+    <div class="text-center mt-4">
+        <a href="@Url.Action("DashboardClinica", "Clinica")" class="btn btn-secondary btn-lg">Volver al Dashboard de Clínica</a>
+    </div>
+</div>
+
+<!-- FontAwesome para íconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<script>
+    function filtrarNominas() {
+        const filtroArea = document.getElementById("filtroArea").value;
+        const filas = document.querySelectorAll("tbody tr");
+
+        filas.forEach(fila => {
+            const area = fila.getAttribute("data-area");
+            fila.style.display = (filtroArea === "Todas" || area === filtroArea) ? "" : "none";
+        });
+    }
+</script>

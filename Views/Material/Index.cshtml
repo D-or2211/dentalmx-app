@@ -1,0 +1,140 @@
+﻿@model List<LaboratorioDentalApp.Models.Material>
+
+@{
+    ViewData["Title"] = "Inventario de Materiales";
+}
+
+<div class="container mt-5">
+    <!-- Encabezado -->
+    <div class="text-center mb-4">
+        <h1 class="fw-bold display-4">Inventario de Materiales del Laboratorio</h1>
+        <p class="text-muted fs-5">Control y monitoreo de los materiales esenciales.</p>
+    </div>
+
+    <!-- Sección de Alertas -->
+    <div class="row">
+        @foreach (var material in Model.Where(m => m.CantidadDisponible <= m.NivelCritico))
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card border-danger shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-danger fw-bold">⚠️ Reposición Urgente</h5>
+                        <p class="card-text">@material.Nombre (Disponible: @material.CantidadDisponible @material.Unidad)</p>
+                        <button class="btn btn-outline-danger btn-sm">Realizar Pedido</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Filtros de Búsqueda -->
+    <div class="row my-4">
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Buscar material por nombre..." id="searchMaterial" />
+        </div>
+        <div class="col-md-4">
+            <select class="form-select" id="filterCategoria">
+                <option value="">Todas las Categorías</option>
+                <option value="Cerámica">Cerámica</option>
+                <option value="Metales">Metales</option>
+                <option value="Resinas">Resinas</option>
+            </select>
+        </div>
+        <div class="col-md-2 text-end">
+            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#agregarMaterialModal">+ Agregar Material</button>
+        </div>
+    </div>
+
+    <!-- Tabla de Materiales -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Cantidad Disponible</th>
+                    <th>Unidad</th>
+                    <th>Última Actualización</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody id="materialTable">
+                @foreach (var material in Model)
+                {
+                    <tr>
+                        <td>@material.Nombre</td>
+                        <td>@material.Categoria</td>
+                        <td>@material.CantidadDisponible</td>
+                        <td>@material.Unidad</td>
+                        <td>@material.FechaActualizacion.ToShortDateString()</td>
+                        <td>
+                            @if (material.CantidadDisponible <= material.NivelCritico)
+                            {
+                                <span class="badge bg-danger">Crítico</span>
+                            }
+                            else if (material.CantidadDisponible <= (material.NivelCritico + 3))
+                            {
+                                <span class="badge bg-warning text-dark">Bajo</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">Disponible</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para Agregar Material -->
+    <div class="modal fade" id="agregarMaterialModal" tabindex="-1" aria-labelledby="agregarMaterialModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="agregarMaterialModalLabel">Agregar Nuevo Material</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label>Nombre del Material</label>
+                                <input type="text" class="form-control" placeholder="Ej: Zirconia" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Categoría</label>
+                                <select class="form-select">
+                                    <option value="Cerámica">Cerámica</option>
+                                    <option value="Metales">Metales</option>
+                                    <option value="Resinas">Resinas</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label>Cantidad Disponible</label>
+                                <input type="number" class="form-control" placeholder="Ej: 5" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Unidad</label>
+                                <input type="text" class="form-control" placeholder="Ej: kg, ml, m" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Nivel Crítico</label>
+                                <input type="number" class="form-control" placeholder="Ej: 3" />
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-success">Guardar Material</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts de Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

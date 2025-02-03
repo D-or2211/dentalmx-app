@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<!-- Fondo completo con degradado -->
+<div class="fullscreen-bg d-flex justify-content-center align-items-center">
+    <div class="card p-4 shadow-lg border-0" style="width: 400px; border-radius: 15px; background-color: white;">
+        <!-- Logo del Laboratorio -->
+        <div class="text-center mb-3">
+            <img src="~/images/logo.png" alt="Logo del Laboratorio" style="width: 120px; height: auto;" />
+        </div>
+
+        <h2 class="text-center text-primary fw-bold">DentalMX</h2>
+        <p class="text-center text-muted">Iniciar Sesión para Continuar</p>
+
+        <!-- Alerta de error -->
+        <div id="errorMessage" class="alert alert-danger d-none" role="alert">
+            Correo o contraseña incorrectos. Intenta de nuevo.
+        </div>
+
+        <form id="loginForm">
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Correo Electrónico</label>
+                <input type="email" id="email" class="form-control shadow-sm" placeholder="Ingresa tu correo" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Contraseña</label>
+                <input type="password" id="password" class="form-control shadow-sm" placeholder="Ingresa tu contraseña" required>
+            </div>
+
+            <button type="button" class="btn btn-primary w-100 py-2 fw-bold" onclick="validateLogin()">Entrar</button>
+
+            <div class="text-center mt-3">
+                <a href="#" class="text-decoration-none text-secondary">¿Olvidaste tu contraseña?</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Estilos CSS para el fondo -->
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #4a90e2, #a1c4fd); /* Aplicar el degradado al body */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .fullscreen-bg {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<!-- Validación de Login -->
+<script>
+    function validateLogin() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('errorMessage');
+
+        if (!email || !password) {
+            errorMessage.textContent = 'Por favor, completa todos los campos.';
+            errorMessage.classList.remove('d-none');
+            return;
+        }
+
+        if (email === 'rodrigoadmin@gmail.com' && password === 'Password123') {
+            window.location.href = '@Url.Action("Dashboard", "Home")';
+        } else {
+            errorMessage.textContent = 'Correo o contraseña incorrectos. Intenta de nuevo.';
+            errorMessage.classList.remove('d-none');
+        }
+    }
+</script>

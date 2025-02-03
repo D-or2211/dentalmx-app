@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Dashboard Clínica";
+
+    Layout = "_Layout";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 class="fw-bold display-5">Bienvenido a la Clínica DentalMX</h1>
+            <p class="text-muted fs-5">Gestión eficiente de doctoras, trabajos, nóminas, pedidos y pacientes.</p>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <!-- Tarjeta de Doctoras -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-lg text-center p-4">
+                <div class="card-body">
+                    <i class="fas fa-user-md fa-4x text-info mb-3"></i>
+                    <h2 class="card-title">Doctoras</h2>
+                    <p class="card-text">Gestión de personal médico de la clínica.</p>
+                    <a href="@Url.Action("Doctoras", "Clinica")" class="btn btn-info btn-lg">Ver Doctoras</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Trabajos -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-lg text-center p-4">
+                <div class="card-body">
+                    <i class="fas fa-briefcase-medical fa-4x text-success mb-3"></i>
+                    <h2 class="card-title">Trabajos</h2>
+                    <p class="card-text">Consulta y gestión de trabajos clínicos.</p>
+                    <a href="@Url.Action("Index", "Libro")" class="btn btn-success btn-lg">Ver Trabajos</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Nóminas -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-lg text-center p-4">
+                <div class="card-body">
+                    <i class="fas fa-file-invoice-dollar fa-4x text-warning mb-3"></i>
+                    <h2 class="card-title">Nóminas</h2>
+                    <p class="card-text">Control de pagos y nóminas del personal.</p>
+                    <a href="@Url.Action("Nominas", "Clinica")" class="btn btn-warning btn-lg">Ver Nóminas</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Pedidos -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-lg text-center p-4">
+                <div class="card-body">
+                    <i class="fas fa-shopping-cart fa-4x text-danger mb-3"></i>
+                    <h2 class="card-title">Pedidos</h2>
+                    <p class="card-text">Gestión de pedidos de la clínica.</p>
+                    <a href="@Url.Action("Pedidos", "Clinica")" class="btn btn-danger btn-lg">Ver Pedidos</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Pacientes -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-lg text-center p-4">
+                <div class="card-body">
+                    <i class="fas fa-users fa-4x text-primary mb-3"></i>
+                    <h2 class="card-title">Pacientes</h2>
+                    <p class="card-text">Gestión de pacientes y su historial clínico.</p>
+                    <a href="@Url.Action("Pacientes", "Clinica")" class="btn btn-primary btn-lg">Ver Pacientes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FontAwesome para íconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

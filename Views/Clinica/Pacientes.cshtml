@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Pacientes";
+    Layout = "_Layout";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 class="fw-bold display-5">Gestión de Pacientes</h1>
+            <p class="text-muted fs-5">Control de pacientes y su historial de citas.</p>
+        </div>
+    </div>
+
+    <!-- Barra de búsqueda -->
+    <div class="row my-4">
+        <div class="col-md-6">
+            <input type="text" id="searchInput" class="form-control" placeholder="Buscar por nombre o folio de expediente" onkeyup="filtrarPacientes()">
+        </div>
+        <div class="col-md-6 text-end">
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#agregarPacienteModal">+ Agregar Paciente</button>
+        </div>
+    </div>
+
+    <!-- Tabla de Pacientes -->
+    <div class="table-responsive">
+        <table class="table table-bordered text-center align-middle" id="pacientesTable">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Folio del Expediente</th>
+                    <th>Citas</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Juan Pérez</td>
+                    <td>123-456-7890</td>
+                    <td>FOL1234</td>
+                    <td>3</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm">Editar</button>
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ana Gómez</td>
+                    <td>987-654-3210</td>
+                    <td>FOL5678</td>
+                    <td>5</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm">Editar</button>
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para Agregar Paciente -->
+    <div class="modal fade" id="agregarPacienteModal" tabindex="-1" aria-labelledby="agregarPacienteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agregarPacienteModalLabel">Agregar Paciente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label>Nombre Completo</label>
+                            <input type="text" class="form-control" placeholder="Nombre del paciente" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Teléfono</label>
+                            <input type="tel" class="form-control" placeholder="123-456-7890" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Folio del Expediente</label>
+                            <input type="text" class="form-control" placeholder="FOL0000" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FontAwesome para íconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<script>
+    function filtrarPacientes() {
+        const searchInput = document.getElementById('searchInput').value.toLowerCase();
+        const pacientes = document.querySelectorAll('#pacientesTable tbody tr');
+
+        pacientes.forEach(row => {
+            const nombre = row.cells[0].innerText.toLowerCase();
+            const folio = row.cells[2].innerText.toLowerCase();
+            row.style.display = nombre.includes(searchInput) || folio.includes(searchInput) ? '' : 'none';
+        });
+    }
+</script>

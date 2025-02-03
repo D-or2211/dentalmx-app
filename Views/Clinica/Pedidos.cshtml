@@ -1,0 +1,114 @@
+﻿@{
+    ViewData["Title"] = "Gestión de Pedidos";
+    Layout = "_Layout";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 class="fw-bold display-5">Gestión de Pedidos</h1>
+            <p class="text-muted fs-5">Control y seguimiento de pedidos realizados por las doctoras hacia el laboratorio.</p>
+        </div>
+    </div>
+
+    <!-- Alerta informativa -->
+    <div class="alert alert-info text-center fw-semibold" role="alert">
+        <i class="fas fa-exclamation-circle me-2"></i> Recuerda que los encargados de agregar los pedidos y llevar su seguimiento son las Doctoras.
+    </div>
+
+    <!-- Botón para agregar un nuevo pedido -->
+    <div class="text-end mb-4">
+        <button class="btn btn-success btn-lg px-4 py-2" data-bs-toggle="modal" data-bs-target="#agregarPedidoModal">+ Agregar Pedido</button>
+    </div>
+
+    <!-- Tabla de pedidos -->
+    <div class="table-responsive">
+        <table class="table table-bordered text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Doctora</th>
+                    <th>Trabajo</th>
+                    <th>Descripción</th>
+                    <th>Estatus</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2024-04-15</td>
+                    <td>Dra. Ana Martínez</td>
+                    <td>Prótesis Parcial</td>
+                    <td>Pedido urgente para paciente Enrique Estrada</td>
+                    <td><span class="badge bg-warning">En Proceso</span></td>
+                    <td>
+                        <button class="btn btn-primary btn-sm me-1">Editar</button>
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2024-04-18</td>
+                    <td>Dra. Lucía Gómez</td>
+                    <td>Puente de Zirconia</td>
+                    <td>Requiere precisión adicional</td>
+                    <td><span class="badge bg-success">Completado</span></td>
+                    <td>
+                        <button class="btn btn-primary btn-sm me-1">Editar</button>
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para Agregar Pedido -->
+    <div class="modal fade" id="agregarPedidoModal" tabindex="-1" aria-labelledby="agregarPedidoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agregarPedidoModalLabel">Agregar Pedido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Fecha</label>
+                            <input type="date" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Doctora</label>
+                            <input type="text" class="form-control" placeholder="Nombre de la doctora" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Trabajo</label>
+                            <input type="text" class="form-control" placeholder="Ej: Prótesis, Zirconia" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Descripción</label>
+                            <textarea class="form-control" rows="3" placeholder="Detalles del pedido" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Estatus</label>
+                            <select class="form-select">
+                                <option value="En Proceso">En Proceso</option>
+                                <option value="Completado">Completado</option>
+                                <option value="Pendiente">Pendiente</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">Guardar Pedido</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón para volver al Dashboard de Clínica -->
+    <div class="text-center mt-4">
+        <a href="@Url.Action("DashboardClinica", "Clinica")" class="btn btn-secondary btn-lg">Volver al Dashboard de Clínica</a>
+    </div>
+</div>
+
+<!-- FontAwesome para íconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,0 +1,116 @@
+﻿@{
+    ViewData["Title"] = "Dashboard Laboratorio";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5" style="min-height: calc(100vh - 150px); overflow-y: auto;">
+    <div class="row justify-content-center">
+        <!-- Tarjeta para Técnicos Dentales -->
+        <div class="col-md-4">
+            <div class="card shadow-lg text-center p-4">
+                <div class="card-body">
+                    <i class="fas fa-user-md fa-3x text-primary mb-3"></i>
+                    <h2 class="card-title">Técnicos Dentales</h2>
+                    <p class="card-text">Gestiona los técnicos y supervisa su trabajo.</p>
+                    <a href="@Url.Action("Index", "Tecnicos")" class="btn btn-primary btn-lg">Ver Técnicos</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta para Trabajos -->
+        <div class="col-md-4">
+            <div class="card shadow-lg text-center p-4">
+                <div class="card-body">
+                    <i class="fas fa-briefcase fa-3x text-success mb-3"></i>
+                    <h2 class="card-title">Trabajos</h2>
+                    <p class="card-text">Consulta y administra los trabajos en curso.</p>
+                    <a href="@Url.Action("Index", "Trabajos")" class="btn btn-success btn-lg">Ver Trabajos</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta para Material (Inventario) -->
+        <div class="col-md-4">
+            <div class="card shadow-lg text-center p-4">
+                <div class="card-body">
+                    <i class="fas fa-boxes fa-3x text-warning mb-3"></i>
+                    <h2 class="card-title">Material</h2>
+                    <p class="card-text">Revisa el inventario disponible del laboratorio.</p>
+                    <a href="@Url.Action("Index", "Material")" class="btn btn-warning btn-lg">Ver Inventario</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Gráfica -->
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <h3 class="text-center">Rendimiento de Trabajos por Clínica</h3>
+            <canvas id="trabajosChart"></canvas>
+        </div>
+
+        <!-- Selector de Tiendas -->
+        <div class="col-md-6">
+            <h3 class="text-center">Seleccionar Clínica</h3>
+            <div class="text-center">
+                <select id="clinicaSelect" class="form-select w-50 mx-auto">
+                    <option value="1">Dental MX Morelia</option>
+                    <option value="2">Dental MX Puebla</option>
+                    <option value="3">Dental MX Leon</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón para volver al dashboard general -->
+    <div class="row mt-5">
+        <div class="col text-center">
+            <a href="@Url.Action("Dashboard", "Home")" class="btn btn-secondary btn-lg">Volver al Inicio</a>
+        </div>
+    </div>
+</div>
+
+<!-- Incluir FontAwesome para íconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<!-- Incluir Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var ctx = document.getElementById('trabajosChart').getContext('2d');
+        var trabajosChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Clínica Norte', 'Clínica Centro', 'Clínica Sur'],
+                datasets: [{
+                    label: 'Trabajos Completados',
+                    data: [20, 35, 15], // Datos de prueba
+                    backgroundColor: ['#007bff', '#28a745', '#ffc107'],
+                    borderColor: ['#0056b3', '#1c7430', '#d39e00'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Cambiar datos cuando se seleccione otra clínica
+        document.getElementById("clinicaSelect").addEventListener("change", function () {
+            var selectedClinica = this.value;
+            var newData = [ // Datos de prueba por clínica seleccionada
+                [20, 35, 15], // Todas
+                [25, 40, 20], // Norte
+                [15, 30, 25], // Centro
+                [30, 20, 10]  // Sur
+            ];
+            trabajosChart.data.datasets[0].data = newData[selectedClinica];
+            trabajosChart.update();
+        });
+    });
+</script>

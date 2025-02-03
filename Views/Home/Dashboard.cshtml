@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 class="fw-bold display-5">Bienvenido a DentalMX</h1>
+            <p class="text-muted fs-5">Gestión eficiente de trabajos y técnicos del laboratorio dental.</p>
+        </div>
+    </div>
+
+    <!-- Espacio adicional entre el título y las tarjetas -->
+    <div class="row justify-content-center mt-5">
+        <!-- Tarjeta del Laboratorio -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg text-center p-4 h-100">
+                <div class="card-body">
+                    <i class="fas fa-flask fa-5x text-primary mb-3"></i>
+                    <h2 class="card-title">Laboratorio</h2>
+                    <p class="card-text">Accede a la gestión de trabajos del laboratorio dental.</p>
+                    <a href="@Url.Action("DashboardLaboratorio", "Home")" class="btn btn-primary btn-lg">Ir al Laboratorio</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de la Clínica -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg text-center p-4 h-100">
+                <div class="card-body">
+                    <i class="fas fa-user-md fa-5x text-success mb-3"></i>
+                    <h2 class="card-title">Clínica</h2>
+                    <p class="card-text">Accede a la gestión de pacientes y citas de la clínica.</p>
+                    <a href="@Url.Action("DashboardClinica", "Clinica")" class="btn btn-success btn-lg">Ir a la Clínica</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Contabilidad -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg text-center p-4 h-100">
+                <div class="card-body">
+                    <i class="fas fa-calculator fa-5x text-warning mb-3"></i>
+                    <h2 class="card-title">Contabilidad</h2>
+                    <p class="card-text">Control de gastos, ingresos y análisis financiero del Dental MX.</p>
+                    <a href="@Url.Action("DashboardContabilidad", "Home")" class="btn btn-warning btn-lg">Ir a Contabilidad</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FontAwesome para los íconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<!-- Ajuste para hacerlo responsivo y permitir scroll si es necesario -->
+<style>
+    body {
+        overflow-y: auto;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    main {
+        flex: 1;
+    }
+</style>

@@ -1,0 +1,160 @@
+﻿@{
+    ViewData["Title"] = "Libro de Registro";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="fw-bold display-5">Libro de Registro</h1>
+        <p class="text-muted fs-5">Monitoreo de trabajos realizados y costos asociados</p>
+    </div>
+
+    <!-- Filtros de búsqueda por fecha -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <label>Fecha Inicio:</label>
+            <input type="date" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label>Fecha Fin:</label>
+            <input type="date" class="form-control" />
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+            <button class="btn btn-primary w-100">Filtrar</button>
+        </div>
+    </div>
+
+    <!-- Botón para agregar un nuevo registro -->
+    <div class="text-end mb-4">
+        <button class="btn btn-success btn-lg px-4 py-2" data-bs-toggle="modal" data-bs-target="#agregarRegistroModal">+ Agregar Registro</button>
+    </div>
+
+    <!-- Tabla de registros -->
+    <div class="table-responsive">
+        <table class="table table-bordered text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Paciente</th>
+                    <th>Doctora</th>
+                    <th>Trabajo</th>
+                    <th>Costo</th>
+                    <th>Abono</th>
+                    <th>Entrega</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2024-04-15</td>
+                    <td>Enrique Estrada</td>
+                    <td>Dra. Martínez</td>
+                    <td>Prótesis Parcial</td>
+                    <td>$1,800</td>
+                    <td>$800</td>
+                    <td>18/10/24</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm me-1">Editar</button>
+                        <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#agregarAbonoModal">Abonar</button>
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2024-04-18</td>
+                    <td>Alejandro Chávez</td>
+                    <td>Dra. Gómez</td>
+                    <td>Puente de Zirconia</td>
+                    <td>$2,400</td>
+                    <td>$1,200</td>
+                    <td>22/10/24</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm me-1">Editar</button>
+                        <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#agregarAbonoModal">Abonar</button>
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para Agregar Registro -->
+    <div class="modal fade" id="agregarRegistroModal" tabindex="-1" aria-labelledby="agregarRegistroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agregarRegistroModalLabel">Agregar Registro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label>Fecha</label>
+                                <input type="date" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Paciente</label>
+                                <input type="text" class="form-control" placeholder="Nombre del paciente" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Doctora Asignada</label>
+                                <input type="text" class="form-control" placeholder="Nombre de la doctora" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Trabajo</label>
+                            <input type="text" class="form-control" placeholder="Ej: Prótesis, Zirconia" />
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label>Costo</label>
+                                <input type="text" class="form-control" placeholder="$0.00" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Abono</label>
+                                <input type="text" class="form-control" placeholder="$0.00" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Fecha de Entrega</label>
+                                <input type="date" class="form-control" />
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-success">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Agregar Abono -->
+    <div class="modal fade" id="agregarAbonoModal" tabindex="-1" aria-labelledby="agregarAbonoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agregarAbonoModalLabel">Agregar Abono</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label>Monto del Abono</label>
+                            <input type="text" class="form-control" placeholder="$0.00" />
+                        </div>
+                        <button type="button" class="btn btn-warning">Guardar Abono</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón para volver al Dashboard -->
+    <div class="text-center mt-4">
+        <a href="@Url.Action("DashboardLaboratorio", "Home")" class="btn btn-secondary btn-lg">Volver</a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

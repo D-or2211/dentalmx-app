@@ -1,0 +1,138 @@
+﻿@model LaboratorioDentalApp.Models.Tecnicos.Tecnico
+
+@{
+    ViewData["Title"] = "Detalles del Técnico";
+}
+
+<div class="container mt-5">
+    <!-- Encabezado -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold display-4">Detalles del Técnico</h1>
+        <p class="text-muted fs-5">Información detallada sobre el rendimiento y actividad del técnico.</p>
+    </div>
+
+    <!-- Tarjeta principal del técnico -->
+    <div class="card shadow-lg p-4 mb-5">
+        <div class="text-center">
+            <i class="fas fa-user-circle fa-8x text-secondary mb-3"></i>
+            <h2 class="fw-bold">@Model.Nombre</h2>
+        </div>
+
+        <!-- Datos clave -->
+        <div class="row text-center mt-4">
+            <div class="col-md-3">
+                <h5 class="fw-semibold text-secondary">Ingreso Mensual</h5>
+                <p class="text-success fs-4 fw-bold">@Model.IngresoMensual</p>
+            </div>
+            <div class="col-md-3">
+                <h5 class="fw-semibold text-secondary">Calificación</h5>
+                <div>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= Model.Calificacion)
+                        {
+                            <i class="fas fa-star text-warning fa-lg"></i>
+                        }
+                        else
+                        {
+                            <i class="far fa-star text-warning fa-lg"></i>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h5 class="fw-semibold text-secondary">Trabajos Realizados</h5>
+                <p class="fs-4 text-primary fw-bold">@Model.TrabajosRealizados</p>
+            </div>
+            <div class="col-md-3">
+                <h5 class="fw-semibold text-secondary">Material Usado</h5>
+                <p class="fs-4 text-danger fw-bold">@Model.MaterialUsado kg</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Rendimiento Semanal -->
+    <div class="card shadow p-4 mb-4">
+        <h4 class="fw-bold text-center mb-3">Rendimiento Semanal</h4>
+        <table class="table table-bordered text-center align-middle table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Semana</th>
+                    <th>Trabajos Completados</th>
+                    <th>Horas Trabajadas</th>
+                    <th>Eficiencia (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Semana 1</td>
+                    <td>30</td>
+                    <td>40 hrs</td>
+                    <td class="text-success fw-bold">95%</td>
+                </tr>
+                <tr>
+                    <td>Semana 2</td>
+                    <td>28</td>
+                    <td>38 hrs</td>
+                    <td class="text-success fw-bold">92%</td>
+                </tr>
+                <tr>
+                    <td>Semana 3</td>
+                    <td>32</td>
+                    <td>42 hrs</td>
+                    <td class="text-success fw-bold">97%</td>
+                </tr>
+                <tr>
+                    <td>Semana 4</td>
+                    <td>25</td>
+                    <td>35 hrs</td>
+                    <td class="text-warning fw-bold">88%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Material Usado -->
+    <div class="card shadow p-4 mb-4">
+        <h4 class="fw-bold text-center mb-3">Material Usado</h4>
+        <table class="table table-striped text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Material</th>
+                    <th>Cantidad Usada (kg)</th>
+                    <th>Trabajos Asociados</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Resina</td>
+                    <td>25 kg</td>
+                    <td>40</td>
+                </tr>
+                <tr>
+                    <td>Cerámica</td>
+                    <td>18 kg</td>
+                    <td>35</td>
+                </tr>
+                <tr>
+                    <td>Metal</td>
+                    <td>20 kg</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>Titanio</td>
+                    <td>12 kg</td>
+                    <td>15</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Botón para volver -->
+    <div class="text-center mt-4">
+        <a href="@Url.Action("Index", "Tecnicos")" class="btn btn-secondary btn-lg">Volver a Técnicos</a>
+    </div>
+</div>
+
+<!-- FontAwesome para íconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
